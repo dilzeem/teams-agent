@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teams Agent</title>
+</head>
+<body>
+    {% if user and user.name %}
+        <h1>Welcome, {{ user.name }}!</h1>
+        <p><a href="{{ url_for('logout') }}">Logout</a></p>
+    {% else %}
+        <h1>Welcome!</h1>
+        <p><a href="{{ url_for('login') }}">Login</a></p>
+    {% endif %}
+    <p>MSAL Python Version: {{ version }}</p>
+
+    {% if session.get("user") %}
+    <h2>Agent Actions:</h2>
+    <p>Send a test message to the agent (requires user to be logged in):</p>
+    <form id="messageForm">
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message" value="Hello Agent"><br><br>
+        <button type="button" onclick="sendMessage()">Send to Agent</button>
+    </form>
+    <p id="response"></p>
+    <script>
+        async function sendMessage() {
+            const message = document.getElementById('message').value;
+            const responseElement = document.getElementById('response');
+            try {
+                const response = await fetch("{{ url_for('teams_message') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ text: message })
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const result = await response.json();
+                responseElement.textContent = 'Server response: ' + JSON.stringify(result);
+            } catch (error) {
+                console.error('Error sending message:', error);
+                responseElement.textContent = 'Error sending message: ' + error;
+            }
+        }
+    </script>
+    {% endif %}
+</body>
+</html>

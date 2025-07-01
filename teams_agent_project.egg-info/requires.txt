@@ -1,0 +1,8 @@
+flask>=2.0
+msal>=1.18.0
+python-dotenv>=0.19
+requests>=2.25
+
+[dev]
+pytest>=6.0
+pylint>=2.10
