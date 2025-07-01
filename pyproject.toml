@@ -1,0 +1,40 @@
+[project]
+name = "teams-agent-project"
+version = "0.1.0"
+description = "A Microsoft Teams agent using Agents-for-python SDK principles."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+  {name = "Your Name", email = "you@example.com"},
+]
+maintainers = [
+  {name = "Your Name", email = "you@example.com"},
+]
+keywords = ["teams", "agent", "microsoft graph", "azure"]
+
+dependencies = [
+  "flask>=2.0",
+  "msal>=1.18.0", # For Microsoft Authentication Library
+  "python-dotenv>=0.19", # For loading .env files
+  "requests>=2.25" # For making HTTP requests to Graph API (example)
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=6.0",
+  "pylint>=2.10",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/your-org/your-repo"
+"Bug Reports" = "https://github.com/your-org/your-repo/issues"
+"Source" = "https://github.com/your-org/your-repo"
+
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+backend-path = "."
+
+[tool.setuptools]
+packages = ["app"]

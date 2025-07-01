@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+app/__init__.py
+app/main.py
+teams_agent_project.egg-info/PKG-INFO
+teams_agent_project.egg-info/SOURCES.txt
+teams_agent_project.egg-info/dependency_links.txt
+teams_agent_project.egg-info/requires.txt
+teams_agent_project.egg-info/top_level.txt
