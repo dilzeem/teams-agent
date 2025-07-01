@@ -80,7 +80,8 @@ uv pip install .
 ```
 
 uv pip install -e .
-uv python app/main.py
+# Make sure to install uvicorn if you haven't already: uv pip install uvicorn
+uvicorn app.main:app --reload --port 5000
 
 ```
 
@@ -112,14 +113,14 @@ uv pip freeze > requirements.txt
 ## Teams Agent: Delegated Permissions
 
 - **Delegated permissions**: The agent should authenticate as the **signed-in user** (not a service principal), so actions are performed on behalf of the user, respecting their Teams/Microsoft 365 permissions.
-- **OAuth2 Authorization Code Flow** is required; users must sign in and consent to the required scopes.
+- **OAuth2 Authorization Code Flow** is required; users must sign in and consent to the required scopes. The application uses FastAPI as its web framework.
 - **No global admin/service principal required**: This improves security and auditability.
 
 **Key setup steps:**
 - Register an Azure AD application for your agent.
 - Configure **redirect URIs** for both local and deployed environments.
 - Request only the minimal delegated permissions (e.g., `Chat.Read`, `User.Read`).
-- Implement OAuth2 code flow in your agent (using `msal` or similar).
+- Implement OAuth2 code flow in your agent (using `msal` or similar). The `app/main.py` file contains the FastAPI application logic.
 
 ---
 
